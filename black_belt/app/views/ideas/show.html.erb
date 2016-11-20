@@ -1,0 +1,22 @@
+<a href = '/bright_ideas'>Bright Ideas</a><br><br>
+<a href ='/users/<%=@idea.user_id%>'><%=@idea.user.alias %></a> says:
+	<%=@idea.message %><br>
+
+<h3>People who liked this post:</h3>
+<table>
+	<thead>
+		<tr>
+			<th>Alias</th>
+			<th>Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |user|%>
+			<tr>
+				<td><a href ="/users/<%=user.id %>"><%= user.alias %></a></td>
+				<td><%= user.name %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+

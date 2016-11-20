@@ -1,0 +1,19 @@
+<h1>Hi <%=@user.name%>!</h1>
+<%=form_for(@idea) do |f| %>
+	<%=f.text_field :message, placeholder: "Post something witty here..." %>
+	<%=f.submit "Idea!" %>
+<% end %>
+
+<% @ideas.each  do |idea| %>
+	<a href ='/users/<%=idea.user_id%>'><%=idea.user.alias %></a> says:
+	<%=idea.message %><br>
+	<%=form_tag("/likes/#{idea.id}", method: "create") do %>
+		<%=submit_tag("Like")%>
+	<% end %>
+	<a href="/bright_ideas/<%=idea.id%>"><%=idea.users_liked.count %> people</a> like this<br>
+	<% if idea.user.id == current_user.id %>
+		<%= form_for(idea, method: "delete") do |f|%>
+			<% f.submit "Delete"%>
+		<% end %>
+	<% end %><hr>
+<% end %>
